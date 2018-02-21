@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pizzeria</string>
+    <string name="keyRoya">CLE_FROM</string>
+    <string name="keyHawa">CLE_HAWA</string>
+    <string name="keyMont">CLE_MONT</string>
+    <string name="keyFrom">CLE_FROM</string>
+    <string name="keyNapo">CLE_NAPO</string>
+    <string name="keyRacl">CLE_RACL</string>
+    <string name="keyPann">CLE_PANN</string>
+    <string name="keyTira">CLE_TIRA</string>
+</resources>

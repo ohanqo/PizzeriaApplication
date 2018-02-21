@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.antoine.pizzeria.PizzeriaMainActivity">
+
+    <TextView
+        android:id="@+id/txtTabl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="30px"
+        android:text="Séléctionnez vos produits"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.WindowTitle" />
+
+    <Button
+        android:id="@+id/btnNapo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Napolitaine" />
+
+    <Button
+        android:id="@+id/btnRoya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Royale" />
+
+    <Button
+        android:id="@+id/btnFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Quatre fromages" />
+
+    <Button
+        android:id="@+id/btnMont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Montagnarde" />
+
+    <Button
+        android:id="@+id/btnRacl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Raclette" />
+
+    <Button
+        android:id="@+id/btnHawa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Hawai" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnPann"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Panna Cotta" />
+
+        <Button
+            android:id="@+id/btnTira"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Tiramisu" />
+    </LinearLayout>
+</LinearLayout>
