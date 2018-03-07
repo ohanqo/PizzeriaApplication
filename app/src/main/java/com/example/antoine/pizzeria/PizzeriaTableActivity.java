@@ -56,6 +56,4 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
         startActivity(intent);
     }
 
-
-
 }

@@ -89,6 +89,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
                 nbMont++;
                 btnMont.setText("Montagnarde : " + nbMont);
                 System.out.println("Montagnarde " + nbMont);
+                SendOrdering sendOrder = new SendOrdering();
+                sendOrder.execute();
                 break;
             case R.id.btnFrom:
                 nbFrom++;
