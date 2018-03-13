@@ -9,6 +9,14 @@ import java.io.PrintWriter;
 
 public class SendOrdering extends AsyncTask<Void, Void, Void> {
 
+    private int table;
+    private String pizza;
+
+    public SendOrdering(int table, String pizza) {
+        this.table = table;
+        this.pizza = pizza;
+    }
+
     @Override
     protected Void doInBackground(Void... voids) {
 
@@ -19,7 +27,8 @@ public class SendOrdering extends AsyncTask<Void, Void, Void> {
             socket = new Socket("chadok.info", 9874);
             //reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-            writer.println("90montagnarde");
+            String msg = this.table + this.pizza;
+            writer.println(msg);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

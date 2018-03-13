@@ -79,43 +79,57 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
                 nbRoya++;
                 btnRoya.setText("Royale : " + nbRoya);
                 System.out.println("Royale " + nbRoya);
+                SendOrdering sendRoya = new SendOrdering(numTabl, "Royale");
+                sendRoya.execute();
                 break;
             case R.id.btnHawa:
                 nbHawa++;
                 btnHawa.setText("Hawai : " + nbHawa);
                 System.out.println("Hawai " + nbHawa);
+                SendOrdering sendHawai = new SendOrdering(numTabl, "Hawai");
+                sendHawai.execute();
                 break;
             case R.id.btnMont:
                 nbMont++;
                 btnMont.setText("Montagnarde : " + nbMont);
                 System.out.println("Montagnarde " + nbMont);
-                SendOrdering sendOrder = new SendOrdering();
-                sendOrder.execute();
+                SendOrdering sendMont = new SendOrdering(numTabl, "Montagnarde");
+                sendMont.execute();
                 break;
             case R.id.btnFrom:
                 nbFrom++;
                 btnFrom.setText("Quatre Fromages : " + nbFrom);
                 System.out.println("Quatre Fromages " + nbFrom);
+                SendOrdering sendFrom = new SendOrdering(numTabl, "Quatre Fromages");
+                sendFrom.execute();
                 break;
             case R.id.btnNapo:
                 nbNapo++;
                 btnNapo.setText("Napolitaine : " + nbNapo);
                 System.out.println("Napolitaine " + nbNapo);
+                SendOrdering sendNapo = new SendOrdering(numTabl, "Napolitaine");
+                sendNapo.execute();
                 break;
             case R.id.btnRacl:
                 nbRacl++;
                 btnRacl.setText("Raclette : " + nbRacl);
                 System.out.println("Raclette " + nbRacl);
+                SendOrdering sendRacl = new SendOrdering(numTabl, "Raclette");
+                sendRacl.execute();
                 break;
             case R.id.btnPann:
                 nbPann++;
                 btnPann.setText("Panna Cotta : " + nbPann);
                 System.out.println("Panna Cotta " + nbPann);
+                SendOrdering sendPann = new SendOrdering(numTabl, "Panna Cotta");
+                sendPann.execute();
                 break;
             case R.id.btnTira:
                 nbTira++;
                 btnTira.setText("Tiramisu : " + nbTira);
                 System.out.println("Tiramisu " + nbTira);
+                SendOrdering sendTira = new SendOrdering(numTabl, "Tiramisu");
+                sendTira.execute();
                 break;
             default:
                 break;
