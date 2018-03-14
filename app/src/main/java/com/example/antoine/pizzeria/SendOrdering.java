@@ -3,32 +3,31 @@ package com.example.antoine.pizzeria;
 import android.os.AsyncTask;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
-public class SendOrdering extends AsyncTask<Void, Void, Void> {
+public class SendOrdering extends AsyncTask<String, String, Void> {
 
-    private int table;
-    private String pizza;
-
-    public SendOrdering(int table, String pizza) {
-        this.table = table;
-        this.pizza = pizza;
-    }
+    String ack;
+    Boolean msgReceived = false;
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Void doInBackground(String... strings) {
 
         Socket socket = null;
-        BufferedReader reader = null;
 
         try {
             socket = new Socket("chadok.info", 9874);
-            //reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-            String msg = this.table + this.pizza;
-            writer.println(msg);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer.println(strings[0]);
+            if ((ack = reader.readLine()) != null) {
+                System.out.println("Message du serveur : " + ack);
+                msgReceived = true;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -41,5 +40,20 @@ public class SendOrdering extends AsyncTask<Void, Void, Void> {
             }
         }
         return null;
+    }
+    /*
+    @Override
+    protected void onProgressUpdate(String... values) {
+        super.onProgressUpdate(values);
+        PizzeriaMainActivity.txtTabl.setText(values[0]);
+    }
+    */
+
+    @Override
+    protected void onPostExecute(Void avoid) {
+        super.onPostExecute(avoid);
+        if (msgReceived) {
+            PizzeriaMainActivity.txtTabl.setText(ack);
+        }
     }
 }
