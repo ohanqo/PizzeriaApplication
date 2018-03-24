@@ -1,62 +1,64 @@
 package com.example.antoine.pizzeria;
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFragment.OnFragmentInteractionListener {
 
-    //private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
-    //static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
-    private FrameLayout pizzafrg;
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link PizzaFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ */
+public class PizzaFragment extends Fragment implements View.OnClickListener {
 
-    public static TextView txtTabl;
-    public static int numTabl;
+    private OnFragmentInteractionListener mListener;
+    private int numTabl = PizzeriaMainActivity.numTabl;
+    private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
+    static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
+
+    public PizzaFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pizzeria_main);
-        /*
-        btnRoya = findViewById(R.id.btnRoya);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout., container, false);
+        View v = inflater.inflate(R.layout.fragment_pizzas, container, false);
+
+        btnRoya = v.findViewById(R.id.btnRoya);
         btnRoya.setOnClickListener(this);
 
-        btnHawa = findViewById(R.id.btnHawa);
+        btnHawa = v.findViewById(R.id.btnHawa);
         btnHawa.setOnClickListener(this);
 
-        btnMont = findViewById(R.id.btnMont);
+        btnMont = v.findViewById(R.id.btnMont);
         btnMont.setOnClickListener(this);
 
-        btnFrom = findViewById(R.id.btnFrom);
+        btnFrom = v.findViewById(R.id.btnFrom);
         btnFrom.setOnClickListener(this);
 
-        btnNapo = findViewById(R.id.btnNapo);
+        btnNapo = v.findViewById(R.id.btnNapo);
         btnNapo.setOnClickListener(this);
 
-        btnRacl = findViewById(R.id.btnRacl);
+        btnRacl = v.findViewById(R.id.btnRacl);
         btnRacl.setOnClickListener(this);
 
-        btnPann = findViewById(R.id.btnPann);
+        btnPann = v.findViewById(R.id.btnPann);
         btnPann.setOnClickListener(this);
 
-        btnTira = findViewById(R.id.btnTira);
+        btnTira = v.findViewById(R.id.btnTira);
         btnTira.setOnClickListener(this);
-        */
-        Intent intent = getIntent();
-        txtTabl = findViewById(R.id.txtTabl);
-        numTabl = intent.getIntExtra(PizzeriaTableActivity.keyTabl, 1);
-        txtTabl.setText("Commande de la table n°" + numTabl);
 
-
-        PizzaFragment pizzafrg = new PizzaFragment();
-        getFragmentManager().beginTransaction().add(R.id.fragment, pizzafrg).commit();
-        /*
         if (savedInstanceState != null) {
 
             int valRoya = savedInstanceState.getInt(getResources().getString(R.string.keyRoya));
@@ -78,10 +80,10 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
             btnTira.setText("Tiramisu : " + String.valueOf(valTira));
 
         }
-        */
+
+        return v;
     }
 
-    /*
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRoya:
@@ -146,7 +148,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(getResources().getString(R.string.keyRoya), nbRoya);
         outState.putInt(getResources().getString(R.string.keyHawa), nbHawa);
@@ -157,49 +159,45 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         outState.putInt(getResources().getString(R.string.keyPann), nbPann);
         outState.putInt(getResources().getString(R.string.keyTira), nbTira);
     }
-    */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        //
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+
+        }
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        System.out.println("Éxécution -> onStart()");
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        System.out.println("Éxécution -> onResume()");
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        System.out.println("Éxécution -> onPause()");
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        System.out.println("Éxécution -> onStop()");
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.out.println("Éxécution -> onDestroy()");
-    }
-    /*
-    @Override
-    protected void onRestoreInstanceState(Bundle outState) {
-        super.onRestoreInstanceState(outState);
-        btnRoya.setText("Royale : " + outState.get(getResources().getString(R.string.keyRoya)));
-        btnHawa.setText("Hawai : " +  outState.get(getResources().getString(R.string.keyHawa)));
-        btnMont.setText("Montagnarde : " + outState.get(getResources().getString(R.string.keyMont)));
-        btnFrom.setText("Quatre Fromages : " + outState.get(getResources().getString(R.string.keyFrom)));
-        btnNapo.setText("Napolitaine : " + outState.get(getResources().getString(R.string.keyNapo)));
-        btnRacl.setText("Raclette : " + outState.get(getResources().getString(R.string.keyRacl)));
-        btnPann.setText("Panna Cotta : " + outState.get(getResources().getString(R.string.keyPann)));
-        btnTira.setText("Tiramisu : " + outState.get(getResources().getString(R.string.keyTira)));
-    }
-    */
+
 }

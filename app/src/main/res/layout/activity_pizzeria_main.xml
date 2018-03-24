@@ -10,12 +10,18 @@
         android:id="@+id/txtTabl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingTop="30px"
+        android:layout_weight="0.25"
         android:text="Séléctionnez vos produits"
+        android:paddingTop="30dp"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.WindowTitle" />
 
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.75"/>
+    <!--
     <Button
         android:id="@+id/btnNapo"
         android:layout_width="match_parent"
@@ -78,4 +84,5 @@
             android:layout_weight="1"
             android:text="Tiramisu" />
     </LinearLayout>
+    -->
 </LinearLayout>

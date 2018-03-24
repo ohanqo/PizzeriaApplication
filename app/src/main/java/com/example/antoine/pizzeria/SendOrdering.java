@@ -1,8 +1,6 @@
 package com.example.antoine.pizzeria;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;

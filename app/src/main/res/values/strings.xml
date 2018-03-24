@@ -8,4 +8,7 @@
     <string name="keyRacl">CLE_RACL</string>
     <string name="keyPann">CLE_PANN</string>
     <string name="keyTira">CLE_TIRA</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
