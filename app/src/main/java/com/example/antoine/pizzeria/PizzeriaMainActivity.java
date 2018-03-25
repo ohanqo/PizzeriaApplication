@@ -14,7 +14,6 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
 
     //private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
     //static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
-    private FrameLayout pizzafrg;
 
     public static TextView txtTabl;
     public static int numTabl;
@@ -54,8 +53,11 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         txtTabl.setText("Commande de la table n°" + numTabl);
 
 
-        PizzaFragment pizzafrg = new PizzaFragment();
-        getFragmentManager().beginTransaction().add(R.id.fragment, pizzafrg).commit();
+        if(findViewById(R.id.fragment) != null) {
+            if (savedInstanceState != null) return;
+            PizzaFragment pizzaFragment = new PizzaFragment();
+            getFragmentManager().beginTransaction().add(R.id.fragment, pizzaFragment).commit();
+        }
         /*
         if (savedInstanceState != null) {
 

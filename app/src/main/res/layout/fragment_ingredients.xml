@@ -5,9 +5,81 @@
     android:id="@+id/fragment"
     tools:context="com.example.antoine.pizzeria.IngredientsFragment">
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btnMozz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mozzarella" />
+
+        <Button
+            android:id="@+id/btnGorg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gorgonzola" />
+
+        <Button
+            android:id="@+id/btnAnch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Anchois" />
+
+        <Button
+            android:id="@+id/btnCapr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Câpres" />
+
+        <Button
+            android:id="@+id/btnOliv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Olives" />
+
+        <Button
+            android:id="@+id/btnArti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Artichauts" />
+
+        <Button
+            android:id="@+id/btnJambCru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Jambon Cru" />
+
+        <Button
+            android:id="@+id/btnJambCuit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Jambon Cuit" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#444"
+            android:padding="20dp"/>
+
+        <Button
+            android:id="@+id/btnVali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="Valider" />
+
+    </LinearLayout>
 </FrameLayout>
