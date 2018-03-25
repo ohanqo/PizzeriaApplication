@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFragment.OnFragmentInteractionListener {
+public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFragment.OnFragmentInteractionListener, IngredientsFragment.OnFragmentInteractionListener {
 
     //private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
     //static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
@@ -162,6 +162,13 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     public void onFragmentInteraction(Uri uri) {
         //
     }
+
+
+    public void replaceWithIngredientsFragment(View view) {
+        IngredientsFragment ingredientsFragment = new IngredientsFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment, ingredientsFragment).addToBackStack(null).commit();
+    }
+
 
     @Override
     protected void onStart() {

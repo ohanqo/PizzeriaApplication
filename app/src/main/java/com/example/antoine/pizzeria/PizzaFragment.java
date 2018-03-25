@@ -20,7 +20,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private int numTabl = PizzeriaMainActivity.numTabl;
-    private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
+    private Button btnPers, btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
     static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
 
     public PizzaFragment() {
@@ -34,6 +34,9 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout., container, false);
         View v = inflater.inflate(R.layout.fragment_pizzas, container, false);
+
+        btnPers = v.findViewById(R.id.btnPers);
+        btnPers.setOnClickListener(this);
 
         btnRoya = v.findViewById(R.id.btnRoya);
         btnRoya.setOnClickListener(this);
@@ -86,6 +89,9 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnPers:
+                ((PizzeriaMainActivity)getActivity()).replaceWithIngredientsFragment(v);
+                break;
             case R.id.btnRoya:
                 nbRoya++;
                 btnRoya.setText("Royale : " + nbRoya);
