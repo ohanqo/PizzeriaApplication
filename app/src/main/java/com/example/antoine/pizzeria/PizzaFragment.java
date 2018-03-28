@@ -19,8 +19,9 @@ import android.widget.Button;
 public class PizzaFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
-    private int numTabl = PizzeriaMainActivity.numTabl;
-    private Button btnPers, btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
+    private String numTabl = PizzeriaMainActivity.numTabl;
+    private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
+    public static Button btnPers;
     static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
 
     public PizzaFragment() {
@@ -63,6 +64,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         btnTira.setOnClickListener(this);
 
         if (savedInstanceState != null) {
+            int valPers = savedInstanceState.getInt(getResources().getString(R.string.keyPers));
             int valRoya = savedInstanceState.getInt(getResources().getString(R.string.keyRoya));
             int valHawa = savedInstanceState.getInt(getResources().getString(R.string.keyHawa));
             int valMont = savedInstanceState.getInt(getResources().getString(R.string.keyMont));
@@ -72,6 +74,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             int valPann = savedInstanceState.getInt(getResources().getString(R.string.keyPann));
             int valTira = savedInstanceState.getInt(getResources().getString(R.string.keyTira));
 
+            btnPers.setText("Pizza personnalisée : " + String.valueOf(valPers));
             btnRoya.setText("Royale : " + String.valueOf(valRoya));
             btnHawa.setText("Hawai : " +  String.valueOf(valHawa));
             btnMont.setText("Montagnarde : " + String.valueOf(valMont));
@@ -188,6 +191,20 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        btnPers.setText("Pizza personnalisée : " + PizzeriaMainActivity.nbPers);
+        btnRoya.setText("Royale : " + nbRoya);
+        btnHawa.setText("Hawai : " + nbHawa);
+        btnMont.setText("Montagnarde : " + nbMont);
+        btnFrom.setText("Quatre Fromages : " + nbFrom);
+        btnNapo.setText("Napolitaine : " + nbNapo);
+        btnRacl.setText("Raclette : " + nbRacl);
+        btnPann.setText("Panna Cotta : " + nbPann);
+        btnTira.setText("Tiramisu : " + nbTira);
     }
 
     /**

@@ -13,7 +13,7 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
 
     private Button btnVali;
     private EditText iptTable;
-    static int idTable;
+    static String idTable;
     final static String keyTabl = "CLE_TABL";
 
     @Override
@@ -49,8 +49,9 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
     }
 
     public void onClick(View v) {
-        String tempId = String.valueOf(iptTable.getText());
-        idTable = Integer.parseInt(tempId);
+        String tempId = iptTable.getText().toString();
+        idTable = (tempId.length() > 0 && tempId.length() < 2) ? "0" + tempId : tempId;
+        System.out.println(idTable);
         Intent intent = new Intent(this, PizzeriaMainActivity.class);
         intent.putExtra(keyTabl, idTable);
         startActivity(intent);

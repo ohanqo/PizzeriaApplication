@@ -16,7 +16,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     //static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
 
     public static TextView txtTabl;
-    public static int numTabl;
+    public static String numTabl;
+    static int nbPers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         */
         Intent intent = getIntent();
         txtTabl = findViewById(R.id.txtTabl);
-        numTabl = intent.getIntExtra(PizzeriaTableActivity.keyTabl, 1);
+        numTabl = intent.getStringExtra(PizzeriaTableActivity.keyTabl);
         txtTabl.setText("Commande de la table n°" + numTabl);
 
 
@@ -58,6 +59,12 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
             PizzaFragment pizzaFragment = new PizzaFragment();
             getFragmentManager().beginTransaction().add(R.id.fragment, pizzaFragment).commit();
         }
+
+        if (savedInstanceState != null) {
+            int valPers = savedInstanceState.getInt("CLE_PERS");
+            PizzaFragment.btnPers.setText("Pizza personnalisée : " + String.valueOf(valPers));
+        }
+
         /*
         if (savedInstanceState != null) {
 
@@ -146,20 +153,13 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
                 break;
         }
     }
-
+    */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(getResources().getString(R.string.keyRoya), nbRoya);
-        outState.putInt(getResources().getString(R.string.keyHawa), nbHawa);
-        outState.putInt(getResources().getString(R.string.keyMont), nbMont);
-        outState.putInt(getResources().getString(R.string.keyFrom), nbFrom);
-        outState.putInt(getResources().getString(R.string.keyNapo), nbNapo);
-        outState.putInt(getResources().getString(R.string.keyRacl), nbRacl);
-        outState.putInt(getResources().getString(R.string.keyPann), nbPann);
-        outState.putInt(getResources().getString(R.string.keyTira), nbTira);
+        outState.putInt(getResources().getString(R.string.keyPers), nbPers);
     }
-    */
+
     @Override
     public void onFragmentInteraction(Uri uri) {
         //
@@ -168,17 +168,21 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
 
     public void returnToPizzaFragment() {
         getFragmentManager().popBackStack();
-        String msg = Integer.toString(numTabl);
-        for(Integer ing: IngredientsFragment.ingredientsSelected) {
-            Button btn = findViewById(ing);
-            msg += (btn.getText() + " + ");
+        String msg = numTabl;
+        if (!IngredientsFragment.ingredientsSelected.isEmpty()) {
+            System.out.println(IngredientsFragment.ingredientsSelected);
+            for (Integer ing : IngredientsFragment.ingredientsSelected) {
+                Button btn = findViewById(ing);
+                msg += (btn.getText() + " + ");
+            }
+            nbPers++;
+            msg = msg.substring(0, msg.length() - 3);
+            SendOrdering sendCustomPizza = new SendOrdering();
+            sendCustomPizza.execute(msg);
+            PizzaFragment.btnPers.setText("Pizza personnalisée : " + nbPers);
+            IngredientsFragment.ingredientsSelected.clear();
         }
-        msg = msg.substring(0, msg.length() - 3);
-        SendOrdering sendCustomPizza = new SendOrdering();
-        sendCustomPizza.execute(msg);
-        IngredientsFragment.ingredientsSelected.clear();
     }
-
 
     public void replaceWithIngredientsFragment() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
