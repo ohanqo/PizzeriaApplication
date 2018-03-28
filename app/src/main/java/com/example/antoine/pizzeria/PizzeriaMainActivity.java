@@ -166,7 +166,21 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     }
 
 
-    public void replaceWithIngredientsFragment(View view) {
+    public void returnToPizzaFragment() {
+        getFragmentManager().popBackStack();
+        String msg = Integer.toString(numTabl);
+        for(Integer ing: IngredientsFragment.ingredientsSelected) {
+            Button btn = findViewById(ing);
+            msg += (btn.getText() + " + ");
+        }
+        msg = msg.substring(0, msg.length() - 3);
+        SendOrdering sendCustomPizza = new SendOrdering();
+        sendCustomPizza.execute(msg);
+        IngredientsFragment.ingredientsSelected.clear();
+    }
+
+
+    public void replaceWithIngredientsFragment() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment, ingredientsFragment).addToBackStack(null).commit();
     }

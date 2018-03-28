@@ -63,7 +63,6 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         btnTira.setOnClickListener(this);
 
         if (savedInstanceState != null) {
-
             int valRoya = savedInstanceState.getInt(getResources().getString(R.string.keyRoya));
             int valHawa = savedInstanceState.getInt(getResources().getString(R.string.keyHawa));
             int valMont = savedInstanceState.getInt(getResources().getString(R.string.keyMont));
@@ -90,7 +89,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPers:
-                ((PizzeriaMainActivity)getActivity()).replaceWithIngredientsFragment(v);
+                ((PizzeriaMainActivity)getActivity()).replaceWithIngredientsFragment();
                 break;
             case R.id.btnRoya:
                 nbRoya++;
