@@ -34,7 +34,7 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(iptTable.getText() != null && !iptTable.getText().toString().matches("")) {
+                if(iptTable.getText() != null && !iptTable.getText().toString().matches("") && !(iptTable.getText().toString().length() > 2)) {
                     btnVali.setEnabled(true);
                 } else {
                     btnVali.setEnabled(false);
