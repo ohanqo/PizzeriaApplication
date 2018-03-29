@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@color/colorBackground"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -18,6 +19,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:textColor="@color/colorText"
+            android:paddingLeft="50dp"
             android:layout_weight="1"
             android:text="Numéro de la table :" />
 
@@ -26,6 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorBackground"
+            android:textColor="@color/colorText"
             android:ems="10"
             android:inputType="number" />
 
@@ -35,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
+        android:background="@color/colorBackground"
         android:gravity="top"
         android:orientation="horizontal">
 
@@ -42,6 +49,8 @@
             android:id="@+id/btnVali"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_margin="50dp"
+            android:background="@color/colorAccent"
             android:text="Valider" />
     </LinearLayout>
 </LinearLayout>

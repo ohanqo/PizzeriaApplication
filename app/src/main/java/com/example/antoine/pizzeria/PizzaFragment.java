@@ -1,9 +1,13 @@
 package com.example.antoine.pizzeria;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -205,6 +209,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         btnRacl.setText("Raclette : " + nbRacl);
         btnPann.setText("Panna Cotta : " + nbPann);
         btnTira.setText("Tiramisu : " + nbTira);
+        applyPreferences();
     }
 
     /**
@@ -222,4 +227,20 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         void onFragmentInteraction(Uri uri);
     }
 
+
+    protected void applyPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean color = sharedPreferences.getBoolean(String.valueOf(getResources().getText(R.string.keyColor)), true);
+        if(color) {
+            btnPers.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnRoya.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnHawa.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnMont.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnFrom.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnNapo.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnRacl.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnPann.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnTira.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+        }
+    }
 }

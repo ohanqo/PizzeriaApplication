@@ -9,15 +9,19 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
+            android:background="@color/colorBackground"
             android:orientation="horizontal">
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnNapo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -25,6 +29,7 @@
                 android:text="Napolitaine" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnRoya"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -33,12 +38,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
+            android:background="@color/colorBackground"
             android:orientation="horizontal">
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnFrom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -46,6 +54,7 @@
                 android:text="Quatre Fromages" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnMont"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,12 +63,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
+            android:background="@color/colorBackground"
             android:orientation="horizontal">
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnRacl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -67,6 +79,7 @@
                 android:text="Raclette" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnHawa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -75,12 +88,15 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
+            android:background="@color/colorBackground"
             android:orientation="horizontal">
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnPann"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -88,6 +104,7 @@
                 android:text="Panna Cotta" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnPers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,6 +113,7 @@
                 android:text="Pizza personnalisée" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/btnTira"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

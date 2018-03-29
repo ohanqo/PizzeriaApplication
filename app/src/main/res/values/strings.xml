@@ -9,5 +9,5 @@
     <string name="keyPann">CLE_PANN</string>
     <string name="keyTira">CLE_TIRA</string>
     <string name="keyPers">CLE_PERS</string>
-
+    <string name="keyColor">CLE_COLO</string>
 </resources>

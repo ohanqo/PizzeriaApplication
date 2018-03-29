@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#55efc4</color>
+    <color name="colorPrimaryDark">#81ecec</color>
+    <color name="colorAccent">#e17055</color>
+    <color name="colorPizzaButtonDefault">#74b9ff</color>
+    <color name="colorBackground">#2d3436</color>
+    <color name="colorText">#eeeeee</color>
 </resources>

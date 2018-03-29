@@ -2,7 +2,10 @@ package com.example.antoine.pizzeria;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +24,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     public static TextView txtTabl;
     public static String numTabl;
     static int nbPers;
+
+    PreferenceFragment preferenceFragment = new Prefs();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +168,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         outState.putInt(getResources().getString(R.string.keyPers), nbPers);
     }
 
+
     @Override
     public void onFragmentInteraction(Uri uri) {
         //
@@ -187,6 +193,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         }
     }
 
+
     public void replaceWithIngredientsFragment() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment, ingredientsFragment).addToBackStack(null).commit();
@@ -201,6 +208,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     @Override
     protected void onResume() {
         super.onResume();
+        applyPreferences();
         System.out.println("Éxécution -> onResume()");
     }
     @Override
@@ -244,6 +252,13 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Afficher les settings
+        getFragmentManager().beginTransaction().replace(R.id.fragment, preferenceFragment).addToBackStack(null).commit();
         return super.onOptionsItemSelected(item);
+    }
+
+
+    protected void applyPreferences() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean color = sharedPref.getBoolean(String.valueOf(getResources().getText(R.string.keyColor)), true);
     }
 }
