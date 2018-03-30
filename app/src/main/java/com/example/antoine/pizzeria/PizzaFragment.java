@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -103,6 +104,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnRoya:
                 nbRoya++;
                 btnRoya.setText("Royale : " + nbRoya);
+                Toast.makeText(getActivity(), "Pizza Royale commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Royale " + nbRoya);
                 SendOrdering sendRoya = new SendOrdering();
                 sendRoya.execute(numTabl+ "Royale");
@@ -110,6 +112,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnHawa:
                 nbHawa++;
                 btnHawa.setText("Hawai : " + nbHawa);
+                Toast.makeText(getActivity(), "Pizza Hawai commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Hawai " + nbHawa);
                 SendOrdering sendHawai = new SendOrdering();
                 sendHawai.execute(numTabl + "Hawai");
@@ -118,6 +121,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
                 nbMont++;
                 btnMont.setText("Montagnarde : " + nbMont);
                 System.out.println("Montagnarde " + nbMont);
+                Toast.makeText(getActivity(), "Pizza Montagnare commandé", Toast.LENGTH_LONG).show();
                 SendOrdering sendMont = new SendOrdering();
                 sendMont.execute(numTabl + "Montagnarde");
                 break;
@@ -125,12 +129,14 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
                 nbFrom++;
                 btnFrom.setText("Quatre Fromages : " + nbFrom);
                 System.out.println("Quatre Fromages " + nbFrom);
+                Toast.makeText(getActivity(), "Pizza Fromage commandé", Toast.LENGTH_LONG).show();
                 SendOrdering sendFrom = new SendOrdering();
                 sendFrom.execute(numTabl + "Quatre Fromages");
                 break;
             case R.id.btnNapo:
                 nbNapo++;
                 btnNapo.setText("Napolitaine : " + nbNapo);
+                Toast.makeText(getActivity(), "Pizza Napolitaine commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Napolitaine " + nbNapo);
                 SendOrdering sendNapo = new SendOrdering();
                 sendNapo.execute(numTabl + "Napolitaine");
@@ -138,6 +144,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnRacl:
                 nbRacl++;
                 btnRacl.setText("Raclette : " + nbRacl);
+                Toast.makeText(getActivity(), "Pizza Raclette commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Raclette " + nbRacl);
                 SendOrdering sendRacl = new SendOrdering();
                 sendRacl.execute(numTabl + "Raclette");
@@ -145,6 +152,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnPann:
                 nbPann++;
                 btnPann.setText("Panna Cotta : " + nbPann);
+                Toast.makeText(getActivity(), "Dessert Panna Cotta commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Panna Cotta " + nbPann);
                 SendOrdering sendPann = new SendOrdering();
                 sendPann.execute(numTabl + "Panna Cotta");
@@ -152,9 +160,24 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnTira:
                 nbTira++;
                 btnTira.setText("Tiramisu : " + nbTira);
+                Toast.makeText(getActivity(), "Dessert Tiramisu commandé", Toast.LENGTH_LONG).show();
                 System.out.println("Tiramisu " + nbTira);
                 SendOrdering sendTira = new SendOrdering();
                 sendTira.execute(numTabl + "Tiramisu");
+                break;
+            case R.id.btnRein:
+                nbRoya = 0;
+                nbHawa = 0;
+                nbMont = 0;
+                nbFrom = 0;
+                nbNapo = 0 ;
+                nbRacl = 0;
+                nbPann = 0;
+                nbTira = 0;
+                IngredientsFragment.ingredientsSelected.clear();
+                PizzeriaMainActivity.nbPers = 0;
+                Toast.makeText(getActivity(), "Réinitialisation", Toast.LENGTH_LONG).show();
+                onResume();
                 break;
             default:
                 break;
