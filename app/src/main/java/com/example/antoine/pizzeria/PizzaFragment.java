@@ -24,7 +24,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private String numTabl = PizzeriaMainActivity.numTabl;
     private Button btnRoya, btnHawa, btnMont, btnFrom, btnNapo, btnRacl, btnPann, btnTira;
-    public static Button btnPers;
+    public static Button btnPers, btnRein;
     static int nbRoya, nbHawa, nbMont, nbFrom, nbNapo, nbRacl, nbPann, nbTira;
 
     public PizzaFragment() {
@@ -65,6 +65,9 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
 
         btnTira = v.findViewById(R.id.btnTira);
         btnTira.setOnClickListener(this);
+
+        btnRein = v.findViewById(R.id.btnRein);
+        btnRein.setOnClickListener(this);
 
         if (savedInstanceState != null) {
             int valPers = savedInstanceState.getInt(getResources().getString(R.string.keyPers));
@@ -240,6 +243,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             btnRacl.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
             btnPann.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
             btnTira.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
+            btnRein.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPizzaButtonDefault));
         }
     }
 }
