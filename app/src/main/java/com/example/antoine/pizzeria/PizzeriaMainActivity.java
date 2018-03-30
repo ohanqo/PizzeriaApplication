@@ -3,6 +3,7 @@ package com.example.antoine.pizzeria;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -14,7 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFragment.OnFragmentInteractionListener, IngredientsFragment.OnFragmentInteractionListener {
 
@@ -23,6 +29,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
 
     public static TextView txtTabl;
     public static String numTabl;
+    // Liste avec les pizzas prêtes
+    public static List<String> readyPizzas = new ArrayList<>();
     static int nbPers;
 
     PreferenceFragment preferenceFragment = new Prefs();
@@ -251,8 +259,14 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Afficher les settings
-        getFragmentManager().beginTransaction().replace(R.id.fragment, preferenceFragment).addToBackStack(null).commit();
+        if(item.getItemId() == R.id.btnReady) {
+            // Afficher les pizza prêtres
+            ReadyPizzaFragment readyPizzaFragment = new ReadyPizzaFragment();
+            getFragmentManager().beginTransaction().replace(R.id.fragment, readyPizzaFragment).addToBackStack(null).commit();
+        } else {
+            // Afficher les settings
+            getFragmentManager().beginTransaction().replace(R.id.fragment, preferenceFragment).addToBackStack(null).commit();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -260,5 +274,19 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
     protected void applyPreferences() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean color = sharedPref.getBoolean(String.valueOf(getResources().getText(R.string.keyColor)), true);
+    }
+
+    protected void fillListPizzaReady() {
+        TextView textView = findViewById(R.id.textViewReadyPizza);
+        textView.setSingleLine(false);
+        textView.setTextColor(getResources().getColor(R.color.colorText));
+        if(!PizzeriaMainActivity.readyPizzas.isEmpty()) {
+            textView.setText("");
+            for(String pizza: PizzeriaMainActivity.readyPizzas) {
+                textView.setText(textView.getText() + pizza + '\n');
+            }
+        } else {
+            textView.setText("Pas de pizza prête.");
+        }
     }
 }

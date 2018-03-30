@@ -10,4 +10,7 @@
     <string name="keyTira">CLE_TIRA</string>
     <string name="keyPers">CLE_PERS</string>
     <string name="keyColor">CLE_COLO</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

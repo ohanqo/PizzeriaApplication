@@ -1,6 +1,12 @@
 package com.example.antoine.pizzeria;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -28,6 +34,7 @@ public class SendOrdering extends AsyncTask<String, String, Void> {
                 System.out.println("Message du serveur : " + ack);
                 publishProgress(ack);
             }
+            // Attend la réponse du serveur
             String end = "";
             while (end.equals("")) {
                 end = reader.readLine();
@@ -52,6 +59,10 @@ public class SendOrdering extends AsyncTask<String, String, Void> {
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
         PizzeriaMainActivity.txtTabl.setText(values[0]);
+
+        if(values[0].contains("prête")) {
+            PizzeriaMainActivity.readyPizzas.add(values[0]);
+        }
     }
 
     /*

@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/btnReady"
+        android:icon="@drawable/ic_local_pizza"
+        android:title="Pizza prête"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
         android:id="@+id/btnPref"
         android:icon="@drawable/ic_settings"
         android:title="Préférences"
