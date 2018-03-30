@@ -29,7 +29,9 @@ public class ReadyPizzaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_ready_pizza, container, false);
     }
 
-
+    /**
+     * Permet de mettre à jour l'écran des pizzas prêtes à chaque retour sur le fragment
+     */
     @Override
     public void onResume() {
         super.onResume();

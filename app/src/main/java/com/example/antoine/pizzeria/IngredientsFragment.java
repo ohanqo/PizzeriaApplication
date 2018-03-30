@@ -26,7 +26,13 @@ public class IngredientsFragment extends Fragment implements View.OnClickListene
         // Required empty public constructor
     }
 
-
+    /**
+     * Attribut les listener et change la couleur des bouttons en fonction de s'ils ont été séléctionné (rotation principalement)
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,7 +115,11 @@ public class IngredientsFragment extends Fragment implements View.OnClickListene
         }
     }
 
-
+    /**
+     * Permet de changer la couleur lors du click
+     * Ajout/retire les ingrédients en fonction de sa présence dans la liste
+     * @param btn
+     */
     private void toggleButton(Button btn) {
         if(ingredientsSelected.contains(btn.getId())) {
             ingredientsSelected.remove((Integer) btn.getId());

@@ -32,14 +32,25 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
 
             }
 
+
+            /**
+             * Vérifie que le numéro de la table est correct
+             * En fonction de cette vérification : met à jour le boutton pour qu'il puisse être appuyable ou non
+             * @param charSequence
+             * @param i
+             * @param i1
+             * @param i2
+             */
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(iptTable.getText() != null && !iptTable.getText().toString().matches("") && !(iptTable.getText().toString().length() > 2)) {
+                // Vérifie que le numéro de la table soit bien valide
+                if(iptTable.getText() != null && !iptTable.getText().toString().matches("") && !iptTable.getText().toString().matches("0") && !(iptTable.getText().toString().length() > 2)) {
                     btnVali.setEnabled(true);
                 } else {
                     btnVali.setEnabled(false);
                 }
             }
+
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -48,13 +59,19 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
         });
     }
 
+
+    /**
+     * Permet de passer à la page avec les pizzas
+     * @param v
+     */
     public void onClick(View v) {
         String tempId = iptTable.getText().toString();
+        // Si le numéro de la pizza est infèrieur à 10 on rajoute un 0 devant pour que le serveur accepte les futurs message
         idTable = (tempId.length() > 0 && tempId.length() < 2) ? "0" + tempId : tempId;
-        System.out.println(idTable);
         Intent intent = new Intent(this, PizzeriaMainActivity.class);
+        // On met dans le intent le numéro de la table renseignée
         intent.putExtra(keyTabl, idTable);
+        // On lance l'activité avec les pizzas
         startActivity(intent);
     }
-
 }

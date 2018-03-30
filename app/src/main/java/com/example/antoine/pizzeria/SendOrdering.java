@@ -18,17 +18,27 @@ public class SendOrdering extends AsyncTask<String, String, Void> {
     String ack;
     //Boolean msgReceived = false;
 
+
+    /**
+     * Envoie & reçois les messages via socket
+     * @param strings : Message/Commande
+     * @return
+     */
     @Override
     protected Void doInBackground(String... strings) {
 
         Socket socket = null;
 
         try {
+            // On définie un nouveau socket
             socket = new Socket("chadok.info", 9874);
-            //socket.setSoTimeout(3000);
+            // On définie un flux permettant d'envoyer un message via le socket
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            // On définie un flux permettant de reçevoir les messages via socket
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // On envoie le message passé par paramètre lors de execute()
             writer.println(strings[0]);
+            // Lis le dernier message du serveur
             ack = reader.readLine();
             if (ack != null) {
                 System.out.println("Message du serveur : " + ack);
@@ -58,8 +68,10 @@ public class SendOrdering extends AsyncTask<String, String, Void> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
+        // Modifie le titre et y affiche le message du serveur
         PizzeriaMainActivity.txtTabl.setText(values[0]);
 
+        // Si le message indique qu'une pizza est prête, on l'ajoute à la liste correspondante
         if(values[0].contains("prête")) {
             PizzeriaMainActivity.readyPizzas.add(values[0]);
         }

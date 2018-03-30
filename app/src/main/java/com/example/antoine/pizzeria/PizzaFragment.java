@@ -70,6 +70,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         btnRein = v.findViewById(R.id.btnRein);
         btnRein.setOnClickListener(this);
 
+        // Si le bundle n'est pas vide on récupère ses valeurs, et on maj les bouttons
         if (savedInstanceState != null) {
             int valPers = savedInstanceState.getInt(getResources().getString(R.string.keyPers));
             int valRoya = savedInstanceState.getInt(getResources().getString(R.string.keyRoya));
@@ -99,20 +100,23 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPers:
+                // Appelle la fonction dans le main pour afficher la pahge avec les ingrédients
                 ((PizzeriaMainActivity)getActivity()).replaceWithIngredientsFragment();
                 break;
             case R.id.btnRoya:
                 nbRoya++;
+                // Met à jour le nombre de pizza
                 btnRoya.setText("Royale : " + nbRoya);
-                Toast.makeText(getActivity(), "Pizza Royale commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Royale commandée.", Toast.LENGTH_LONG).show();
                 System.out.println("Royale " + nbRoya);
+                // Envoie au serveur la commande
                 SendOrdering sendRoya = new SendOrdering();
                 sendRoya.execute(numTabl+ "Royale");
                 break;
             case R.id.btnHawa:
                 nbHawa++;
                 btnHawa.setText("Hawai : " + nbHawa);
-                Toast.makeText(getActivity(), "Pizza Hawai commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Hawai commandée.", Toast.LENGTH_LONG).show();
                 System.out.println("Hawai " + nbHawa);
                 SendOrdering sendHawai = new SendOrdering();
                 sendHawai.execute(numTabl + "Hawai");
@@ -121,7 +125,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
                 nbMont++;
                 btnMont.setText("Montagnarde : " + nbMont);
                 System.out.println("Montagnarde " + nbMont);
-                Toast.makeText(getActivity(), "Pizza Montagnare commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Montagnarde commandée.", Toast.LENGTH_LONG).show();
                 SendOrdering sendMont = new SendOrdering();
                 sendMont.execute(numTabl + "Montagnarde");
                 break;
@@ -129,14 +133,14 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
                 nbFrom++;
                 btnFrom.setText("Quatre Fromages : " + nbFrom);
                 System.out.println("Quatre Fromages " + nbFrom);
-                Toast.makeText(getActivity(), "Pizza Fromage commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Fromage commandée.", Toast.LENGTH_LONG).show();
                 SendOrdering sendFrom = new SendOrdering();
                 sendFrom.execute(numTabl + "Quatre Fromages");
                 break;
             case R.id.btnNapo:
                 nbNapo++;
                 btnNapo.setText("Napolitaine : " + nbNapo);
-                Toast.makeText(getActivity(), "Pizza Napolitaine commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Napolitaine commandée.", Toast.LENGTH_LONG).show();
                 System.out.println("Napolitaine " + nbNapo);
                 SendOrdering sendNapo = new SendOrdering();
                 sendNapo.execute(numTabl + "Napolitaine");
@@ -144,7 +148,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnRacl:
                 nbRacl++;
                 btnRacl.setText("Raclette : " + nbRacl);
-                Toast.makeText(getActivity(), "Pizza Raclette commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Pizza Raclette commandée.", Toast.LENGTH_LONG).show();
                 System.out.println("Raclette " + nbRacl);
                 SendOrdering sendRacl = new SendOrdering();
                 sendRacl.execute(numTabl + "Raclette");
@@ -152,7 +156,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnPann:
                 nbPann++;
                 btnPann.setText("Panna Cotta : " + nbPann);
-                Toast.makeText(getActivity(), "Dessert Panna Cotta commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Dessert Panna Cotta commandé.", Toast.LENGTH_LONG).show();
                 System.out.println("Panna Cotta " + nbPann);
                 SendOrdering sendPann = new SendOrdering();
                 sendPann.execute(numTabl + "Panna Cotta");
@@ -160,12 +164,13 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
             case R.id.btnTira:
                 nbTira++;
                 btnTira.setText("Tiramisu : " + nbTira);
-                Toast.makeText(getActivity(), "Dessert Tiramisu commandé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Dessert Tiramisu commandé.", Toast.LENGTH_LONG).show();
                 System.out.println("Tiramisu " + nbTira);
                 SendOrdering sendTira = new SendOrdering();
                 sendTira.execute(numTabl + "Tiramisu");
                 break;
             case R.id.btnRein:
+                // Réinitialise toute les valeurs des bouttons
                 nbRoya = 0;
                 nbHawa = 0;
                 nbMont = 0;
@@ -174,9 +179,13 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
                 nbRacl = 0;
                 nbPann = 0;
                 nbTira = 0;
+                // Réinitialise les ingrédients
                 IngredientsFragment.ingredientsSelected.clear();
+                // Réinitialise le nombre de pizza personnalisée
                 PizzeriaMainActivity.nbPers = 0;
+                // Affiche un toast de confirmation
                 Toast.makeText(getActivity(), "Réinitialisation", Toast.LENGTH_LONG).show();
+                // Appelle onResume pour actualiser les bouttons
                 onResume();
                 break;
             default:
@@ -184,6 +193,11 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
+    /**
+     * Met à jour les valeurs concernant le nombre de pizzas
+     * @param outState
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -197,6 +211,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         outState.putInt(getResources().getString(R.string.keyTira), nbTira);
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -204,6 +219,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -216,12 +232,17 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+
+    /**
+     * Met à jour les bouttons et applique les préférences
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -236,6 +257,7 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
         btnTira.setText("Tiramisu : " + nbTira);
         applyPreferences();
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -253,6 +275,9 @@ public class PizzaFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    /**
+     * Applique les couleurs si le boutton dans la partie préférences a été coché
+     */
     protected void applyPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         boolean color = sharedPreferences.getBoolean(String.valueOf(getResources().getText(R.string.keyColor)), true);

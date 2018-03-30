@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,18 +65,23 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         btnTira = findViewById(R.id.btnTira);
         btnTira.setOnClickListener(this);
         */
+
+        // Récupère la vue affichant les messages, ainsi que le numéro de la table depuis l'intent
         Intent intent = getIntent();
         txtTabl = findViewById(R.id.txtTabl);
         numTabl = intent.getStringExtra(PizzeriaTableActivity.keyTabl);
         txtTabl.setText("Commande de la table n°" + numTabl);
 
-
+        // Si le fragment n'est pas lancé, on le lance
+        // Utilisé au démarrage de l'application
         if(findViewById(R.id.fragment) != null) {
             if (savedInstanceState != null) return;
+            // On affiche le fragment avec les pizzas
             PizzaFragment pizzaFragment = new PizzaFragment();
             getFragmentManager().beginTransaction().add(R.id.fragment, pizzaFragment).commit();
         }
 
+        // On met à jour la valeur du boutton pizza pérsonnalisée
         if (savedInstanceState != null) {
             int valPers = savedInstanceState.getInt("CLE_PERS");
             PizzaFragment.btnPers.setText("Pizza personnalisée : " + String.valueOf(valPers));
@@ -182,26 +188,39 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         //
     }
 
-
+    /**
+     * Permet de revenir à l'écran séléction des pizzas
+     */
     public void returnToPizzaFragment() {
         getFragmentManager().popBackStack();
+        // Récupère le numéro de la table et le met dans le futur message
         String msg = numTabl;
+        // Si des ingrédients ont été séléctionnés
         if (!IngredientsFragment.ingredientsSelected.isEmpty()) {
-            System.out.println(IngredientsFragment.ingredientsSelected);
+            // Pour chaque ingrédients on récupère son nom et l'ajoute au message
             for (Integer ing : IngredientsFragment.ingredientsSelected) {
                 Button btn = findViewById(ing);
                 msg += (btn.getText() + " + ");
             }
+            // Incrément le nombre de pizzas personnalisées
             nbPers++;
+            // On retire le dernier + ainsi que les espaces
             msg = msg.substring(0, msg.length() - 3);
+            // On envoie le message au serveur
             SendOrdering sendCustomPizza = new SendOrdering();
             sendCustomPizza.execute(msg);
+            // On affiche le toast de confirmation
+            Toast.makeText(this, "Pizza personnalisée commandée.", Toast.LENGTH_LONG).show();
+            // Actualise le nombre de pizzas personnalisées sur le boutton
             PizzaFragment.btnPers.setText("Pizza personnalisée : " + nbPers);
+            // On vide les ingrédients présent dans la liste
             IngredientsFragment.ingredientsSelected.clear();
         }
     }
 
-
+    /**
+     * Permet d'afficher la page de la pizza personnalisée
+     */
     public void replaceWithIngredientsFragment() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment, ingredientsFragment).addToBackStack(null).commit();
@@ -256,32 +275,45 @@ public class PizzeriaMainActivity extends AppCompatActivity implements PizzaFrag
         return true;
     }
 
-
+    /**
+     * Permet d'afficher la page souhaitée, soit la page des pizzas prêtes, soit les préférences
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.btnReady) {
-            // Afficher les pizza prêtres
+            // Affiche les pizza prêtes
             ReadyPizzaFragment readyPizzaFragment = new ReadyPizzaFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment, readyPizzaFragment).addToBackStack(null).commit();
         } else {
-            // Afficher les settings
+            // Affiche les préférences
             getFragmentManager().beginTransaction().replace(R.id.fragment, preferenceFragment).addToBackStack(null).commit();
         }
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Permet d'appliquer les préférences
+     */
     protected void applyPreferences() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean color = sharedPref.getBoolean(String.valueOf(getResources().getText(R.string.keyColor)), true);
     }
 
+    /**
+     * Permet d'afficher les pizzas prêtes
+     */
     protected void fillListPizzaReady() {
+        // On récupère la textview du fragment prefs
         TextView textView = findViewById(R.id.textViewReadyPizza);
         textView.setSingleLine(false);
         textView.setTextColor(getResources().getColor(R.color.colorText));
+        // Si des pizzas sont prêtes
         if(!PizzeriaMainActivity.readyPizzas.isEmpty()) {
+            // On effaces l'ancien message
             textView.setText("");
+            // On affiche la table et les pizzas prêtes
             for(String pizza: PizzeriaMainActivity.readyPizzas) {
                 textView.setText(textView.getText() + pizza + '\n');
             }
